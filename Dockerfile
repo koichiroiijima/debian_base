@@ -52,7 +52,9 @@ RUN set -ex \
     ca-certificates \
     openssl \
     openssh-client \
-    gnupg
+    gnupg \
+    inetutils-ping \
+    vim
 
 # Install develpment commands
 RUN set -ex \
