@@ -1,4 +1,4 @@
-FROM debian:10.0-slim
+FROM debian:10.1-slim
 
 ARG IMAGE_NAME=debian_base
 ARG IMAGE_VERSION=0.0.1
@@ -10,18 +10,21 @@ LABEL \
 # Set User
 USER root
 
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+ENV ENV=/root/.bashrc
+ENV TZ=America/Los_Angeles
+ENV PATH=/opt/bin:/root/bini:${PATH}
+SHELL ["/bin/bash", "-c"]
+
 # Set working directory
 WORKDIR /opt/
 RUN set -ex \
     && \
     mkdir -p /root/bin \
     && \
-    mkdir -p /opt/bin
-ENV PATH=${PATH}:/opt/bin:/root/bin
-
+    mkdir -p /opt/bin \
 # Set timezone
-ENV TZ=America/Los_Angeles
-RUN set -ex \
     && \
     apt-get update \
     && \
@@ -34,17 +37,14 @@ RUN set -ex \
     && \
     date \
     && \
-    apt-get remove -y tzdata
-
+    apt-get remove -y tzdata \
 # Install utility commands
-RUN set -ex \
-    && \
-    apt-get update \
     && \
     apt-get install  --no-install-recommends -y \
     bash \
     wget \
     curl \
+    git \
     tar \
     gzip \
     unzip \
@@ -54,22 +54,15 @@ RUN set -ex \
     openssh-client \
     gnupg \
     inetutils-ping \
-    vim
-
+    vim \
 # Install develpment commands
-RUN set -ex \
-    && \
-    apt-get update \
     && \
     apt-get install  --no-install-recommends -y \
     git \
     gcc \
     g++ \
     gfortran \
-    perl 
-
-# Clean apt
-RUN set -ex \
+    perl \
     && \
     apt-get autoclean \
     && \
