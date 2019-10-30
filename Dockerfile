@@ -12,10 +12,8 @@ USER root
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV ENV=/root/.bashrc
 ENV TZ=America/Los_Angeles
-ENV PATH=/opt/bin:/root/bini:${PATH}
-SHELL ["/bin/bash", "-c"]
+ENV PATH=/opt/bin:/root/bin:${PATH}
 
 # Set working directory
 WORKDIR /opt/
@@ -44,7 +42,6 @@ RUN set -ex \
     bash \
     wget \
     curl \
-    git \
     tar \
     gzip \
     unzip \
@@ -69,5 +66,8 @@ RUN set -ex \
     apt-get clean \
     && \
     rm -rf /var/lib/apt/lists/*
+
+ENV ENV=/root/.bashrc
+SHELL ["/bin/bash", "-c"]
 
 CMD ["bash"]
