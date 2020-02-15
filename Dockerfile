@@ -1,4 +1,4 @@
-FROM debian:10.1-slim
+FROM debian:buster-20200130-slim
 
 ARG IMAGE_NAME=debian_base
 ARG IMAGE_VERSION=0.0.1

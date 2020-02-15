@@ -2,7 +2,7 @@
 set -ex
 cd "$(dirname "$0")"
 
-VERSION=10.1-0.0.2-20191029
+VERSION=buster-20200130-slim-0.0.3-20200215
 docker build . --squash -t debian_base:${VERSION} --build-arg IMAGE_VERSION=${VERSION} --build-arg IMAGE_NAME="debian_base"
 docker tag debian_base:${VERSION} debian_base:latest
 
