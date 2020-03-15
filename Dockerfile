@@ -52,6 +52,7 @@ RUN set -ex \
     gnupg \
     inetutils-ping \
     vim \
+    git \
 # Install develpment commands
     && \
     apt-get autoclean \
