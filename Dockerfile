@@ -1,7 +1,7 @@
-FROM debian:buster-20200130-slim
+FROM debian:bullseye-20200224-slim
 
 ARG IMAGE_NAME=debian_base
-ARG IMAGE_VERSION=0.0.1
+ARG IMAGE_VERSION=0.0.2
 
 LABEL \
     NAME=${IMAGE_NAME}} \
@@ -53,13 +53,6 @@ RUN set -ex \
     inetutils-ping \
     vim \
 # Install develpment commands
-    && \
-    apt-get install  --no-install-recommends -y \
-    git \
-    gcc \
-    g++ \
-    gfortran \
-    perl \
     && \
     apt-get autoclean \
     && \
