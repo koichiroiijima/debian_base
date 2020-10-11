@@ -1,7 +1,8 @@
-FROM debian:bullseye-20200224-slim
-
 ARG IMAGE_NAME=debian_base
-ARG IMAGE_VERSION=0.0.2
+ARG IMAGE_VERSION=0.0.1
+ARG BASE_IMAGE=buster-20200908-slim
+
+FROM debian:${BASE_IMAGE}
 
 LABEL \
     NAME=${IMAGE_NAME}} \
@@ -12,7 +13,7 @@ USER root
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV TZ=America/Los_Angeles
+ENV TZ=Asia/Tokyo
 ENV PATH=/opt/bin:/root/bin:${PATH}
 
 # Set working directory
