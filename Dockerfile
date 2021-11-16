@@ -1,6 +1,6 @@
 ARG IMAGE_NAME=debian_base
 ARG IMAGE_VERSION=0.0.1
-ARG BASE_IMAGE=bullseye-20210408-slim
+ARG BASE_IMAGE=bullseye-20211011-slim
 
 FROM debian:${BASE_IMAGE}
 
