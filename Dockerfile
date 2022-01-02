@@ -16,6 +16,9 @@ ENV LANG=C.UTF-8
 ENV TZ=Asia/Tokyo
 ENV PATH=/opt/bin:/root/bin:${PATH}
 
+ENV ENV=/root/.bashrc
+SHELL ["/bin/bash", "-c"]
+
 # Set working directory
 WORKDIR /opt/
 RUN set -ex \
@@ -61,8 +64,5 @@ RUN set -ex \
     apt-get clean \
     && \
     rm -rf /var/lib/apt/lists/*
-
-ENV ENV=/root/.bashrc
-SHELL ["/bin/bash", "-c"]
 
 CMD ["bash"]
