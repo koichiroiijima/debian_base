@@ -1,6 +1,6 @@
 ARG IMAGE_NAME=debian_base
 ARG IMAGE_VERSION=0.0.1
-ARG BASE_IMAGE=bookworm-20211220-slim
+ARG BASE_IMAGE=bookworm-slim
 
 FROM debian:${BASE_IMAGE}
 
@@ -57,7 +57,6 @@ RUN set -ex \
     inetutils-ping \
     vim \
     git \
-# Install develpment commands
     && \
     apt-get autoclean \
     && \
