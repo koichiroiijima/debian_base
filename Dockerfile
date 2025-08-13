@@ -30,6 +30,10 @@ RUN set -ex \
     && \
     apt-get update \
     && \
+    apt-get upgrade -y \
+    && \
+    apt-get dist-upgrade -y \
+    && \
     apt-get install  --no-install-recommends -y \
     tzdata \
     && \
@@ -57,6 +61,10 @@ RUN set -ex \
     inetutils-ping \
     vim \
     git \
+    && \
+    update-ca-certificates \
+    && \
+    apt-get autoremove -y \
     && \
     apt-get autoclean \
     && \
