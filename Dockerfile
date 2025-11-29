@@ -1,13 +1,16 @@
-ARG IMAGE_NAME=debian_base
-ARG IMAGE_VERSION=0.0.1
 ARG BASE_IMAGE=bookworm-slim
 
 FROM debian:${BASE_IMAGE}
 
+ARG IMAGE_NAME=debian_base
+ARG IMAGE_VERSION=0.0.1
+ARG USERNAME=appuser
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+
 LABEL \
     NAME=${IMAGE_NAME} \
     VERSION=${IMAGE_VERSION}
-
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
@@ -68,16 +71,16 @@ RUN set -ex \
     rm -rf /var/lib/apt/lists/* \
 # Create a non-root user
     && \
-    groupadd -r appuser \
+    groupadd -r -g ${GROUP_ID} ${USERNAME} \
     && \
-    useradd -r -g appuser -u 1000 appuser \
+    useradd -r -g ${GROUP_ID} -u ${USER_ID} ${USERNAME} -m -d /home/${USERNAME} -s /bin/bash \
     && \
-    mkdir -p /home/appuser \
+    mkdir -p /home/${USERNAME} \
     && \
-    chown -R appuser:appuser /home/appuser
+    chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}
 
-USER appuser
-WORKDIR /home/appuser
-ENV ENV=/home/appuser/.bashrc
+USER ${USERNAME}
+WORKDIR /home/${USERNAME}
+ENV ENV=/home/${USERNAME}/.bashrc
 
 CMD ["bash"]
