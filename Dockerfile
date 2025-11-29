@@ -5,22 +5,17 @@ ARG BASE_IMAGE=bookworm-slim
 FROM debian:${BASE_IMAGE}
 
 LABEL \
-    NAME=${IMAGE_NAME}} \
-    VERSION=${IMAGE_VERSION}}
+    NAME=${IMAGE_NAME} \
+    VERSION=${IMAGE_VERSION}
 
-# Set User
-USER root
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 ENV TZ=Asia/Tokyo
 ENV PATH=/opt/bin:/root/bin:${PATH}
 
-ENV ENV=/root/.bashrc
-SHELL ["/bin/bash", "-c"]
-
 # Set working directory
-WORKDIR /opt/
+SHELL ["/bin/bash", "-c"]
 RUN set -ex \
     && \
     mkdir -p /root/bin \
@@ -70,6 +65,19 @@ RUN set -ex \
     && \
     apt-get clean \
     && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* \
+# Create a non-root user
+    && \
+    groupadd -r appuser \
+    && \
+    useradd -r -g appuser -u 1000 appuser \
+    && \
+    mkdir -p /home/appuser \
+    && \
+    chown -R appuser:appuser /home/appuser
+
+USER appuser
+WORKDIR /home/appuser
+ENV ENV=/home/appuser/.bashrc
 
 CMD ["bash"]
