@@ -8,7 +8,7 @@ docker build . --progress=plain -t debian_base:${VERSION} \
     --build-arg IMAGE_VERSION=${VERSION} \
     --build-arg IMAGE_NAME="debian_base" \
     --build-arg BASE_IMAGE=${BASE_IMAGE} \
-    --build-arg USERNAME="apspuser" \
+    --build-arg USERNAME="appuser" \
     --build-arg USER_ID=$(id -u) \
     --build-arg GROUP_ID=$(id -g)
     
